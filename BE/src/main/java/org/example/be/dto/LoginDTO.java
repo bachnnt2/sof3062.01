@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package org.example.be.dto;
 
 import lombok.Getter;
 import lombok.Setter;

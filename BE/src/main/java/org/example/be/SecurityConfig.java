@@ -1,13 +1,11 @@
-package com.example.demo;
-
-import com.example.demo.entity.Customer;
-import com.example.demo.repository.CustomerRepository;
+package org.example.be;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.be.entity.Customer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -47,7 +45,7 @@ public class SecurityConfig {
 
     // ===== 2) Load user từ DB =====
     @Bean
-    public UserDetailsService userDetailsService(CustomerRepository repo) {
+    public UserDetailsService userDetailsService(org.example.be.repository.CustomerRepository repo) {
         return username -> {
             Customer c = repo.findById(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
