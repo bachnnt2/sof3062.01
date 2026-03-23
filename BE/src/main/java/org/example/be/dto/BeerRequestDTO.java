@@ -18,6 +18,7 @@ public class BeerRequestDTO {
     @NotBlank(message = "Thêm tên đi con zời ơi")
     private String name;
 
+    @NotBlank(message = "Không có ảnh thì đi tìm kiểu gì")
     private String image;
 
     @NotNull(message = "Say rồi à, nạp tiền đi")
