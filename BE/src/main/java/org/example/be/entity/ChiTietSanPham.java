@@ -31,4 +31,17 @@ public class ChiTietSanPham {
     @ManyToOne
     @JoinColumn(name = "san_pham_id")
     private Sanpham sanpham;
+
+    @Override
+    public String toString() {
+        return "ChiTietSanPham{" +
+                "id=" + id +
+                ", mauSac='" + mauSac + '\'' +
+                ", kickCo='" + kickCo + '\'' +
+                ", chatLieu='" + chatLieu + '\'' +
+                ", baoHanh=" + baoHanh +
+                ", xuatXu='" + xuatXu + '\'' +
+                ", sanpham=" + sanpham +
+                '}';
+    }
 }

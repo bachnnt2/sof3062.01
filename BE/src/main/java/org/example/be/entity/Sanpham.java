@@ -36,4 +36,17 @@ public class Sanpham {
 
     @OneToMany(mappedBy = "sanpham")
     private List<ChiTietSanPham> lstChiTiet;
+
+    @Override
+    public String toString() {
+        return "Sanpham{" +
+                "id=" + id +
+                ", ten='" + ten + '\'' +
+                ", loai='" + loai + '\'' +
+                ", gia=" + gia +
+                ", soLuong=" + soLuong +
+                ", trangThai=" + trangThai +
+                ", moTa='" + moTa + '\'' +
+                '}';
+    }
 }
