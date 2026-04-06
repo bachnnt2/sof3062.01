@@ -3,12 +3,16 @@ package org.example.be.controller;
 import jakarta.validation.Valid;
 import org.example.be.dto.*;
 import org.example.be.entity.ChiTietSanPham;
+import org.example.be.entity.Product;
 import org.example.be.entity.Sanpham;
 import org.example.be.exception.BeerResponseException;
 import org.example.be.repository.ChiTietSanPhamRepository;
 import org.example.be.repository.SanPhamRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +33,24 @@ public class ChiTietSanPhamController {
     public ArrayList getAllChiTietSanPham() {
         ArrayList<ChiTietSanPhamResponseDTO> lstChitiet = (ArrayList<ChiTietSanPhamResponseDTO>) chiTietSanPhamRepository.getAllChiTietSanPham();
         return lstChitiet;
+    }
+
+    @GetMapping("/chatlieu")
+    public ArrayList getAllChiTietSanPhamByChatlieu(@RequestParam("chatlieu")
+                                                    String chatlieu) {
+        ArrayList<ChiTietSanPhamResponseDTO> lstChitiet =
+                (ArrayList<ChiTietSanPhamResponseDTO>) chiTietSanPhamRepository.findChiTietSanPhamByChatlieu(chatlieu);
+        return lstChitiet;
+    }
+
+    @GetMapping("/page")
+    public Page<ChiTietSanPhamResponseDTO> findPageChiTietSanPhamByBaohanh(@RequestParam("baohanh")
+                                                                           int baohanh,
+                                                                           @RequestParam int page,
+                                                                           @RequestParam int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ChiTietSanPhamResponseDTO> pageChiTiet = chiTietSanPhamRepository.findPageChiTietSanPhamByBaohanh(baohanh, pageable);
+        return pageChiTiet;
     }
 
     @PostMapping("/them")

@@ -4,11 +4,9 @@ import jakarta.validation.Valid;
 import org.example.be.dto.BeerRequestDTO;
 import org.example.be.dto.BeerResponseDTO;
 import org.example.be.entity.Product;
-import org.example.be.exception.BeerResponseException;
-import org.example.be.repository.ProductRepository;
 import org.example.be.service.ProductService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +21,18 @@ public class ProductController {
     @GetMapping
     public ArrayList getAllProducts() {
         ArrayList<Product> listProducts = productService.getAllProducts();
+        return listProducts;
+    }
+
+    @GetMapping("/page")
+    public Page<Product> getProductPage(@RequestParam int page, @RequestParam int size) {
+        Page<Product> result = productService.getProductPage(page, size);
+        return result;
+    }
+
+    @GetMapping("/name")
+    public ArrayList getProductPage(@RequestParam("name") String name) {
+        ArrayList<Product> listProducts = productService.getAllProductsByName(name);
         return listProducts;
     }
 
@@ -58,4 +68,6 @@ public class ProductController {
                         "Đã sửa thằng beer có mã là " + pSua.getId() +
                                 " có tên là " + pSua.getName()));
     }
+
+
 }
